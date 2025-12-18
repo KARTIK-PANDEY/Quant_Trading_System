@@ -225,7 +225,7 @@ Contributions are welcome! 🚀
 
 ## 📜 License
 
-This project is licensed under the **MIT License**.
+This project is licensed under the **Eclipse Public License - v 2.0**.
 
 ---
 
@@ -240,3 +240,4 @@ This project is licensed under the **MIT License**.
 ## ⭐ If you find this project useful
 
 Give it a **star ⭐** on GitHub — it really helps!
+
