@@ -169,6 +169,247 @@ stock_data = Stock_Data(
 
 ---
 
+# 🧠 Architecture & Trading Strategy Design
+
+This document provides a **deep technical explanation** of the internal architecture, data flow, and trading strategy logic used in the **Quant Trading System**.
+It is intended for **researchers, reviewers, and advanced users** who want to understand *how and why* the system works.
+
+---
+
+## 1. System Architecture Overview
+
+The system follows a **modular, pipeline-based architecture**, ensuring scalability, reproducibility, and research extensibility.
+
+```
+┌────────────┐
+│ Yahoo API  │
+└─────┬──────┘
+      │
+      ▼
+┌────────────────────┐
+│ Data Preprocessing │
+│ (Cleaning, TI,     │
+│  Scaling)          │
+└─────┬──────────────┘
+      │
+      ▼
+┌────────────────────┐
+│ Feature Engineering│
+│ - Technical        │
+│ - Temporal         │
+│ - Covariance       │
+└─────┬──────────────┘
+      │
+      ▼
+┌────────────────────┐
+│ Prediction Models  │
+│ (ML / DL / RL)     │
+└─────┬──────────────┘
+      │
+      ▼
+┌────────────────────┐
+│ Portfolio Engine   │
+│ (Ranking + Top-K)  │
+└─────┬──────────────┘
+      │
+      ▼
+┌────────────────────┐
+│ Backtesting Engine │
+│ (Risk Metrics)     │
+└────────────────────┘
+```
+
+---
+
+## 2. Data Flow Explanation
+
+### Step 1: Market Data Ingestion
+
+* Source: **Yahoo Finance**
+* Frequency: **Daily bars**
+* Assets:
+
+  * DOW30
+  * NASQ100
+  * SSE50
+
+Handled by:
+
+* `YahooFinance.py`
+* `download_stock_data.py`
+
+---
+
+### Step 2: Data Cleaning & Alignment
+
+Key challenges addressed:
+
+* Missing trading days
+* Delisted / illiquid stocks
+* Cross-asset date alignment
+
+Solution:
+
+* Keep only **intersection of tickers** available across all dates
+* Enforce consistent `(date, ticker)` ordering
+
+---
+
+### Step 3: Feature Engineering
+
+#### 3.1 Technical Indicators
+
+Computed using `stockstats`:
+
+* MACD
+* Bollinger Bands (UB/LB)
+* RSI (30)
+* CCI (30)
+* DX (30)
+* SMA (30, 60)
+
+These capture **momentum, volatility, and trend structure**.
+
+---
+
+#### 3.2 Temporal Market Features
+
+| Feature | Description    |
+| ------- | -------------- |
+| Open    | Opening price  |
+| High    | Daily high     |
+| Low     | Daily low      |
+| Close   | Adjusted close |
+| Volume  | Trading volume |
+
+---
+
+#### 3.3 Covariance Matrix (Risk Structure)
+
+A **rolling 252-day covariance matrix** is computed:
+
+```
+Cov_t = Cov(returns_{t-252 : t})
+```
+
+Purpose:
+
+* Capture **inter-stock dependency**
+* Enable **risk-aware learning**
+* Useful for graph-based and attention models
+
+---
+
+## 4. Dataset Construction Logic
+
+Implemented in `stock_data_handle.py`.
+
+### Input Tensor
+
+```
+X ∈ ℝ[Days × Stocks × Features]
+```
+
+### Label Tensor
+
+```
+Y ∈ ℝ[Prediction_Horizon × Days × Stocks]
+```
+
+Label definition:
+
+```
+Return_{t+h} = (P_{t+h} - P_t) / P_t
+```
+
+---
+
+## 5. Trading Strategy Design
+
+### 5.1 Prediction → Ranking
+
+For each trading day:
+
+1. Model predicts **future returns** for all stocks
+2. Stocks are **ranked descending** by predicted return
+
+---
+
+### 5.2 Portfolio Construction (Top-K)
+
+| Parameter | Meaning                   |
+| --------- | ------------------------- |
+| K         | Number of selected stocks |
+| H         | Holding period (days)     |
+
+Strategy:
+
+* Buy **Top-K ranked stocks**
+* Equal-weighted allocation
+* Hold for **H days**
+
+---
+
+### 5.3 Rebalancing
+
+* Portfolio is rebalanced after every holding period
+* Prevents excessive turnover
+* Mimics realistic trading constraints
+
+---
+
+## 6. Backtesting Methodology
+
+### Assumptions
+
+* No leverage
+* No short selling
+* Equal capital allocation
+* Daily re-evaluation
+
+### Metrics Computed
+
+| Metric            | Interpretation            |
+| ----------------- | ------------------------- |
+| Sharpe Ratio      | Risk-adjusted return      |
+| Sortino Ratio     | Downside risk             |
+| Max Drawdown      | Worst peak-to-trough loss |
+| Annualized Return | Normalized performance    |
+| Information Ratio | Alpha vs Market           |
+
+---
+
+## 7. Why This System Is Robust
+
+✔ Market-agnostic design
+✔ No look-ahead bias
+✔ Strict temporal splitting
+✔ Risk-aware features
+✔ Modular extensibility
+
+---
+
+## 8. Extension Ideas
+
+* Transaction cost modeling
+* Volatility targeting
+* Reinforcement learning agent
+* Intraday data support
+* Regime detection
+
+---
+
+## 9. Intended Use
+
+This repository is suitable for:
+
+* Quantitative research
+* ML for finance projects
+* Academic experimentation
+* Strategy prototyping
+
+---
+
 ## 📈 Backtesting Framework
 
 Backtesting is designed to simulate **real‑world trading constraints**.
@@ -251,6 +492,7 @@ Visit My Website:- **https://kartik-pandey.github.io/My_Portfolio_Website/**
 ## ⭐ If you find this project useful
 
 Give it a **star ⭐** on GitHub — it really helps!
+
 
 
 
