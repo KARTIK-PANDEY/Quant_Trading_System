@@ -202,6 +202,10 @@ results = model.backtest(topk=5, holding_period=10)
 * **`backtest.ipynb`** → Strategy evaluation & visualization
 * **`Code_Challenge.ipynb`** → Experiments, ideas & prototyping
 
+## Trading Strategy Logic
+- Prediction → Ranking → Allocation → Rebalancing
+
+
 ---
 
 ## ⚠️ Disclaimer
@@ -245,6 +249,7 @@ For any Query, E-Mail:- **kartik0pandey00@gmail.com**
 ## ⭐ If you find this project useful
 
 Give it a **star ⭐** on GitHub — it really helps!
+
 
 
 
