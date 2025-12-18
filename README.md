@@ -235,12 +235,16 @@ This project is licensed under the **Eclipse Public License - v 2.0**.
 * Open‑source Quant & ML community
 * Academic research in financial time‑series modeling
 
+---
+
 ## OWNER😎 Created By:- "**KARTIK PANDEY**"
+For any Query, E-Mail:- **kartik0pandey00@gmail.com**
 
 ---
 
 ## ⭐ If you find this project useful
 
 Give it a **star ⭐** on GitHub — it really helps!
+
 
 
