@@ -12,7 +12,7 @@ This repository provides an **end‑to‑end pipeline** — from **raw market da
 
   * US Dow Jones 30 (DOW30)
   * US NASDAQ‑100 (NASQ100)
-  * 🇨🇳 Shanghai Stock Exchange 50 (SSE50)
+  * China Shanghai Stock Exchange 50 (SSE50)
  
 * 📊 **Rich Feature Engineering**:
 
@@ -92,7 +92,7 @@ pip install -r requirements.txt
 
 ### Supported Data Source
 
-* **Yahoo Finance API** (via `yfinance`)
+**Yahoo Finance API** (via `yfinance`)
 
 ### Download & Preprocess Market Data
 
@@ -493,6 +493,7 @@ Visit My Website:- **https://kartik-pandey.github.io/My_Portfolio_Website/**
 ## ⭐ If you find this project useful
 
 Give it a **star ⭐** on GitHub — it really helps!
+
 
 
 
