@@ -132,7 +132,7 @@ Configured in `config.py`:
 * DX (30)
 * SMA (30, 60)
 
-### Temporal Features
+### Temporal Features (OHLCV)
 
 * Open
 * High
@@ -173,20 +173,20 @@ stock_data = Stock_Data(
 # 🧠 Architecture & Trading Strategy Design
 
 This document provides a **deep technical explanation** of the internal architecture, data flow, and trading strategy logic used in the **Quant Trading System**.
-It is intended for **researchers, reviewers, and advanced users** who want to understand *how and why* the system works.
+It is intended for **researchers, reviewers, and advanced users** who want to understand *How and Why* the Trading system works.
 
 ---
 
 ## 1. System Architecture Overview
 
-The system follows a **modular, pipeline-based architecture**, ensuring scalability, reproducibility, and research extensibility.
+The system follows a **Modular, Pipeline-based Architecture**, ensuring scalability, reproducibility, and research extensibility.
 
 ```
-┌────────────┐
-│ Yahoo API  │
-└─────┬──────┘
-      │
-      ▼
+ ┌────────────┐
+ │ Yahoo API  │
+ └─────┬──────┘
+       │
+       ▼
 ┌────────────────────┐
 │ Data Preprocessing │
 │ (Cleaning, TI,     │
@@ -218,6 +218,7 @@ The system follows a **modular, pipeline-based architecture**, ensuring scalabil
 │ Backtesting Engine │
 │ (Risk Metrics)     │
 └────────────────────┘
+
 ```
 
 ---
@@ -273,9 +274,9 @@ These capture **momentum, volatility, and trend structure**.
 
 ---
 
-#### 3.2 Temporal Market Features
+#### 3.2 Temporal Market Features (OHLCV)
 
-| Feature | Description    |
+| Feature |  Description   |
 | ------- | -------------- |
 | Open    | Opening price  |
 | High    | Daily high     |
@@ -304,6 +305,7 @@ Purpose:
 ## 4. Dataset Construction Logic
 
 Implemented in `stock_data_handle.py`.
+
 
 ### Input Tensor
 
@@ -372,7 +374,7 @@ Strategy:
 
 | Metric            | Interpretation            |
 | ----------------- | ------------------------- |
-| Sharpe Ratio      | Risk-adjusted return      |
+| Sharp Ratio       | Risk-adjusted return      |
 | Sortino Ratio     | Downside risk             |
 | Max Drawdown      | Worst peak-to-trough loss |
 | Annualized Return | Normalized performance    |
@@ -493,6 +495,7 @@ Visit My Website:- **https://kartik-pandey.github.io/My_Portfolio_Website/**
 ## ⭐ If you find this project useful
 
 Give it a **star ⭐** on GitHub — it really helps!
+
 
 
 
