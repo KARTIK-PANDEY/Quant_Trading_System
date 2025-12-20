@@ -10,8 +10,8 @@ This repository provides an **end‑to‑end pipeline** — from **raw market da
 * 🔄 **End‑to‑End Quant Pipeline**: Data → Feature Engineering → Prediction → Portfolio Construction → Backtesting
 * 🌍 **Multi‑Market Support**:
 
-  * 🇺🇸 Dow Jones 30 (DOW30)
-  * 🇺🇸 NASDAQ‑100 (NASQ100)
+  * US Dow Jones 30 (DOW30)
+  * US NASDAQ‑100 (NASQ100)
   * 🇨🇳 Shanghai Stock Exchange 50 (SSE50)
 * 📊 **Rich Feature Engineering**:
 
@@ -492,6 +492,7 @@ Visit My Website:- **https://kartik-pandey.github.io/My_Portfolio_Website/**
 ## ⭐ If you find this project useful
 
 Give it a **star ⭐** on GitHub — it really helps!
+
 
 
 
